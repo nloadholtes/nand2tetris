@@ -1,18 +1,27 @@
-
 class Parser(object):
     operation = None
 
     def __init__(self) -> None:
-        self.operation = []
+        self.operations = []
 
-    def read_file(self, filname):
-        pass
+    def read_file(self, filename):
+        with open(filename, "r") as f:
+            yield f.readline()
 
     def split_line(self, line):
-        pass
+        return 
 
     def translate_operation(self, tokens):
         pass
+
+    def parse(self, filename):
+        print("Starting parsing")
+        line = self.read_file(filename)
+        while line:
+            tokens = self.split_line()
+            operation = self.translate_operation(tokens)
+            self.operations.append(operation)
+        print("Parsing complete")
 
 
 class Operation(object):
