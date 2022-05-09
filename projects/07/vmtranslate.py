@@ -19,7 +19,7 @@ class Parser(object):
         print("Starting parsing")
         lines = self.read_file(filename)
         for line in lines:
-            print(f"  Looking at: {line}")
+            # print(f"  Looking at: {line}")
             tokens = self.split_line(line)
             operation = self.translate_operation(tokens)
             self.operations.append(operation)
