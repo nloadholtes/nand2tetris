@@ -6,7 +6,8 @@ class Parser(object):
 
     def read_file(self, filename):
         with open(filename, "r") as f:
-            yield f.readline()
+            for line in f.readlines():
+                yield line
 
     def split_line(self, line):
         return 
@@ -16,12 +17,14 @@ class Parser(object):
 
     def parse(self, filename):
         print("Starting parsing")
-        line = self.read_file(filename)
-        while line:
-            tokens = self.split_line()
+        lines = self.read_file(filename)
+        for line in lines:
+            print(f"  Looking at: {line}")
+            tokens = self.split_line(line)
             operation = self.translate_operation(tokens)
             self.operations.append(operation)
         print("Parsing complete")
+        return self.operations
 
 
 class Operation(object):
@@ -32,12 +35,13 @@ class Operation(object):
 
 class CodeWriter(object):
     def write_code(self, code):
+        print(f"Number of ops in code: %s" % len(code))
         raise NotImplementedError("Need to do this")
 
 
 if __name__ == "__main__":
     parser = Parser()
     # TODO: Read from commandline
-    code = parser.parse()
+    code = parser.parse("StackArithmetic/SimpleAdd/SimpleAdd.vm")
     cwriter = CodeWriter()
     cwriter.write_code(code)
