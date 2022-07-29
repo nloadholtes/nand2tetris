@@ -1,3 +1,7 @@
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+
 class Parser(object):
     operation = None
 
@@ -21,11 +25,11 @@ class Parser(object):
         if operation:
             for arg in tokens[1:]:
                 operation.args.append(arg)
-        print(f"tokens: {tokens}")
+        logging.debug(f"tokens: {tokens}")
         return operation
 
     def parse(self, filename):
-        print("Starting parsing")
+        logging.info("Starting parsing")
         lines = self.read_file(filename)
         for line in lines:
             # print(f"  Looking at: {line}")
@@ -33,7 +37,7 @@ class Parser(object):
             operation = self.translate_operation(tokens)
             if operation:
                 self.operations.append(operation)
-        print("Parsing complete")
+        logging.info("Parsing complete")
         return self.operations
 
 
@@ -43,18 +47,18 @@ class Operation(object):
 
     def __init__(self, command):
         self.command = command
-    
+
     def __repr__(self) -> str:
         return f"{self.command} --> {self.args}"
  
 
 class CodeWriter(object):
     def write_code(self, program_name, code):
-        print(f"Number of ops in code: %s" % len(code))
+        logging.info(f"Number of ops in code: %s" % len(code))
         program = []
         # Next steps: For each operation write out command and args in hack format
         for op in code:
-            print(op)
+            logging.debug(op)
             # Translate 
         # Write out
         with open(program_name+".output", "w") as f:
