@@ -21,7 +21,7 @@ class Parser(object):
             raise Exception("No tokens suppled")
         if tokens[0] in ["//", "\n", ""]:
             return None
-        operation = operation_mappings.get(tokens[0])
+        operation = operation_mappings.get(tokens[0])  # BUG: slams all ops together
         if operation:
             for arg in tokens[1:]:
                 operation.args.append(arg)
