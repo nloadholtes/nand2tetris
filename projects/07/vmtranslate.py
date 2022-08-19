@@ -2,7 +2,7 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-class Parser(object):
+class Parser:
     operation = None
 
     def __init__(self) -> None:
@@ -21,11 +21,11 @@ class Parser(object):
             raise Exception("No tokens suppled")
         if tokens[0] in ["//", "\n", ""]:
             return None
-        operation = operation_mappings.get(tokens[0])  # BUG: slams all ops together
+        operation = Operation(tokens[0])
         if operation:
             for arg in tokens[1:]:
                 operation.args.append(arg)
-        logging.debug(f"tokens: {tokens}")
+        logging.debug("tokens: %s", tokens)
         return operation
 
     def parse(self, filename):
@@ -41,25 +41,25 @@ class Parser(object):
         return self.operations
 
 
-class Operation(object):
+class Operation:
     command = None
-    args = []
 
     def __init__(self, command):
         self.command = command
+        self.args = []
 
     def __repr__(self) -> str:
         return f"{self.command} --> {self.args}"
- 
 
-class CodeWriter(object):
+
+class CodeWriter:
     def write_code(self, program_name, code):
-        logging.info(f"Number of ops in code: %s" % len(code))
+        logging.info("Number of ops in code: %s", len(code))
         program = []
         # Next steps: For each operation write out command and args in hack format
         for op in code:
             logging.debug(op)
-            # Translate 
+            # Translate
         # Write out
         with open(program_name+".output", "w") as f:
             f.write("\n".join(program))
