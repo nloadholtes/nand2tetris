@@ -60,8 +60,14 @@ class CodeWriter:
         for op in code:
             logging.debug(op)
             # Translate
+            if op.command == 'push':
+                if op.args[0] == 'constant':
+                    program.append(f"@{op.args[1]}")
+                    program.append("D=A")
+            if op.command == 'add':
+                program.append('add')
         # Write out
-        with open(program_name+".output", "w") as f:
+        with open(program_name+".output.asm", "w") as f:
             f.write("\n".join(program))
 
 operation_mappings = {
