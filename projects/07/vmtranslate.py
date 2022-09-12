@@ -1,6 +1,6 @@
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.WARNING)
 
 class Parser:
     operation = None
@@ -60,6 +60,7 @@ class CodeWriter:
         for op in code:
             logging.debug(op)
             # Translate
+            program.append(f"\r\n// {op}")
             if op.command == 'push':
                 if op.args[0] == 'constant':
                     program.append(f"@{op.args[1]}")
@@ -68,7 +69,7 @@ class CodeWriter:
                 program.append('add')
         # Write out
         with open(program_name+".output.asm", "w") as f:
-            f.write("\n".join(program))
+            f.write("\r\n".join(program))
 
 operation_mappings = {
     "push": Operation("push"),
