@@ -69,9 +69,11 @@ class CodeWriter:
                     program.append(f"@{op.args[1]}")
                     program.append("D=A")
                 continue
-            if op.command == 'add':
-                program.append('add')
+            # no-argument operations
+            if op.command in ["lt", "gt", "add", "and", "eq", "sub", "neg", "or", "not", "end"]:
+                program.append(op.command)
                 continue
+            # If this line gets hit, then you have missed something
             logging.error("Unhandled token: %s", op)
         # Write out
         with open(filepath + "/" + program_name + ".asm", "w") as f:
