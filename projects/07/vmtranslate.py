@@ -68,8 +68,11 @@ class CodeWriter:
                 if op.args[0] == 'constant':
                     program.append(f"@{op.args[1]}")
                     program.append("D=A")
+                continue
             if op.command == 'add':
                 program.append('add')
+                continue
+            logging.error("Unhandled token: %s", op)
         # Write out
         with open(filepath + "/" + program_name + ".asm", "w") as f:
             f.write("\r\n".join(program))
