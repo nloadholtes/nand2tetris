@@ -1,4 +1,7 @@
+#
+#
 import logging
+import argparse
 
 logging.basicConfig(level=logging.WARNING)
 
@@ -53,7 +56,7 @@ class Operation:
 
 
 class CodeWriter:
-    def write_code(self, program_name, code):
+    def write_code(self, filepath, program_name, code):
         logging.info("Number of ops in code: %s", len(code))
         program = []
         # Next steps: For each operation write out command and args in hack format
@@ -68,7 +71,7 @@ class CodeWriter:
             if op.command == 'add':
                 program.append('add')
         # Write out
-        with open(program_name+".output.asm", "w") as f:
+        with open(filepath + "/" + program_name + ".asm", "w") as f:
             f.write("\r\n".join(program))
 
 operation_mappings = {
@@ -78,7 +81,13 @@ operation_mappings = {
 
 if __name__ == "__main__":
     parser = Parser()
-    # TODO: Read from commandline
-    code = parser.parse("StackArithmetic/SimpleAdd/SimpleAdd.vm")
+    import sys
+    if len(sys.argv) < 2:
+        raise Exception("No file specified")
+
+    input_file = sys.argv[1]
+    filename = ".".join(input_file.split("/")[-1].split(".")[:-1])
+    filepath = "/".join(input_file.split("/")[:-1])
+    code = parser.parse(input_file)
     cwriter = CodeWriter()
-    cwriter.write_code("test_program", code)
+    cwriter.write_code(filepath, filename, code)
