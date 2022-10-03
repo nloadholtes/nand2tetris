@@ -67,6 +67,7 @@ class CodeWriter:
             if op.command == 'push':
                 if op.args[0] == 'constant':
                     program.append(f"@{op.args[1]}")
+                    # BUG This next line is not correct, re-watch video 0.6 and 0.7
                     program.append("D=A")
                 continue
             # no-argument operations
