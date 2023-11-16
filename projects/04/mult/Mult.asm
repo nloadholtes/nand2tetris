@@ -1,16 +1,20 @@
 @2
 M=0  // Set R2 to 0, this is where we put our answer
+// Set R3 to be the value in R2
+@2
+D=M
+@3
+M=0
+// Loop
 (LOOP)
 @0
 D=M
-@1
+@2
 D=D+A
-@0
-M=M-1  // WRONG. Don't modify R0 and R1.
+@3  // R3 is our counter, decrement it by 1
+M=M-1
 @LOOP
 0;JGT
 (END)
-@2
-M=
 @END
 0;JMP
