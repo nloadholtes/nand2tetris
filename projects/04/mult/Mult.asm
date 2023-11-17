@@ -21,3 +21,22 @@ M=D+M
 (END)
 @END
 0;JMP
+
+//
+//
+//
+
+// Init RAM[3] to RAM[1]. This is the counter
+@1
+D=M
+@3
+M=D
+
+// Set top-of-loop marker
+// If @3 is less than or equal to 0, jump to end
+// Set RAM[2] = RAM[2] + RAM[0]
+// Decrement @3
+// JMP to LOOP
+
+// set END marker
+// JMP TO END (infinite loop)
