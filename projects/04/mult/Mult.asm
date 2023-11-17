@@ -7,14 +7,17 @@ D=M
 M=D
 // Loop
 (LOOP)
+@3  // R3 is our counter, decrement it by 1
+D=M
+@END
+D=D-1  // Decrement only if > 0
+0;JEQ  // Jump to the end if we are less than 0
 @0
 D=M
-@2
+@2  // Perform the addition
 M=D+M
-@3  // R3 is our counter, decrement it by 1
-M=M-1
 @LOOP
-0;JGT
+0;JMP  // Jump back to the top of loop
 (END)
 @END
 0;JMP
