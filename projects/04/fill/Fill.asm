@@ -18,9 +18,16 @@
 // clear memory
 
 // listen for keypress
+@24576
+D=M 
+// if no key, jump to loop
+@LOOP
+D;JEQ
 
 // blacken the screen (start with 1 pixel)
-
+// This needs to be a loop over the (256x512)
+@SCREEN
+M=1
 
 @LOOP
 0;JMP
