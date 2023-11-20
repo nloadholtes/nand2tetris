@@ -12,3 +12,15 @@
 // the screen should remain fully clear as long as no key is pressed.
 
 // Put your code here.
+
+
+(LOOP)
+// clear memory
+
+// listen for keypress
+
+// blacken the screen (start with 1 pixel)
+
+
+@LOOP
+0;JMP
