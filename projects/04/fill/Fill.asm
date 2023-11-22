@@ -26,6 +26,9 @@ D;JEQ
 
 // blacken the screen (start with 1 pixel)
 // This needs to be a loop over the (256x512)
+@2
+M=16384
+
 @SCREEN
 M=1
 
