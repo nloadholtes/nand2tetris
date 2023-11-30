@@ -17,6 +17,25 @@
 (LOOP)
 // clear memory
 
+@SCREEN
+D=A
+@2
+M=D
+@8191  // How much we are going to write
+D=A
+@2
+M=D+M
+(CLEAR)
+// Write 4FFF to the memory pointed to in R[2].
+
+@CLEAR
+0;JNE // Jump if there are still blocks to clear?
+
+@24575
+D=A
+@2
+M=D
+
 // listen for keypress
 @24576
 D=M 
