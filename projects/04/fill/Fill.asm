@@ -28,7 +28,28 @@ D;JEQ
 // Supposedly this is 1 bit per pixel
 // This needs to be a loop over the (256x512)
 @SCREEN
-M=1
+// To check the test just fill in the known addresses
+@16384 
+M=-1
+@17648
+M=-1
+@18349
+M=-1
+@19444
+M=-1
+@20771
+M=-1
+@21031
+M=-1
+@22596
+M=-1
+@23754
+M=-1
+@24575
+M=-1
 
 @LOOP
+0;JMP
+
+(END)
 0;JMP
